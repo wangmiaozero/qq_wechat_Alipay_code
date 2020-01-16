@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>三个码合成</title>
+  <style type="text/css">
+    * {
+      margin: auto;
+      padding: 0;
+      border: 0;
+    }
+
+    html {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      font-family: -apple-system, SF UI Text, Arial, Microsoft YaHei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+      color: #333;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    h3 {
+      padding: 10px;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .title {
+      padding: 2em 0;
+      background-color: #fff;
+    }
+
+    .content {
+      padding: 2em 1em;
+      color: #fff;
+    }
+
+    .wepay {
+      background-color: #23ac38;
+    }
+
+    .qq {
+      background-color: #4c97d5;
+    }
+
+    .other {
+      background-color: #ff7055;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">
+      <h1></h1>
+    </div>
+  </div>
+</body>
+<script>
+  is_code()
+  function is_code()
+  {
+    var $ua = navigator.userAgent.toLowerCase()
+    var $type = ''
+    var $name = ''
+    var $url = ''
+    var $icon_img = ''
+    if ($ua.match(/MicroMessenger/i) == 'micromessenger') {
+      $type = 'wepay'
+      $name = '微信支付'
+      //微信支付链接
+      $url = 'wxp://f2f0OI0K-DjKTUUo5ijir72IR4EeOdb9__8h'
+      $icon_img = `<img src="http://ww2.sinaimg.cn/large/005zWjpngy1fojrwgr20oj303k03kglg.jpg" width="48px" height="48px" alt=".$name."/>`
+    } else if ($ua.match(/AlipayClient/i) == 'alipayclient') {
+      //支付宝链接
+      $url = 'HTTPS://QR.ALIPAY.COM/FKX028454NIDTGHALS3WAF'
+      location.href = $url
+      header('location: '.$url);
+    } else if ($ua.match(/QQ/i) == 'qq') {
+      $type = 'qq'
+      $name = 'QQ钱包支付'
+      //QQ钱包支付链接
+      $url =
+        'https://i.qianbao.qq.com/wallet/sqrcode.htm?m=tenpay&a=1&u=462369233&ac=85CCA61B3297A14170CA733F85CFD04570EA3B81CB753F421194E5C79701B294&n=Mamba&f=wallet'
+      $icon_img = `<img src="http://ww2.sinaimg.cn/large/005zWjpngy1fojrvmp427j303k03kjrb.jpg" width="48px" height="48px" alt=".${$name}."/>`
+    } else {
+      $type = 'wepay'
+      $name = '微信支付'
+      //微信支付链接
+      $url = 'wxp://f2f0OI0K-DjKTUUo5ijir72IR4EeOdb9__8h'
+      $icon_img = `<img src="http://ww2.sinaimg.cn/large/005zWjpngy1fojrwgr20oj303k03kglg.jpg" width="48px" height="48px" alt=".$name."/>`
+    }
+    console.log($ua.match())
+    console.log($ua)
+    console.log($icon_img)
+    let data = {
+      $type,
+      $name,
+      $url,
+      $icon_img
+    }
+    document.querySelector('.title').innerHTML = data.$icon_img
+    return data
+  }
+
+
+  function strpos(haystack, needle, start)
+  {
+    if (typeof (start) === "undefined") {
+      start = 0;
+    }
+    if (!needle) {
+      return 0;
+    }
+    var j = 0;
+    for (var i = start; i < haystack.length && j < needle.length; i++) {
+      if (haystack.charAt(i) === needle.charAt(j)) {
+        j++;
+      } else {
+        j = 0;
+      }
+    }
+    if (j === needle.length) {
+      return i - needle.length;
+    }
+    return -1;
+  }
+</script>
+
+</html>
